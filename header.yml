@@ -1,0 +1,7 @@
+---
+header-includes: |
+  \usepackage{fancyhdr}
+  \pagestyle{fancy}
+  \fancyhead[L]{[71.14] Modelos y Optimización I}
+  \fancyhead[R]{Federico del Mazo}
+---
