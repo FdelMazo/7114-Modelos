@@ -1,0 +1,22 @@
+name: Upload-PDF
+on: push
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Install Pandoc
+        run: sudo apt-get install -y pandoc
+
+      - name: Make pdf
+        run: make all
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: resueltos
+          path: resueltos.pdf
