@@ -4,5 +4,5 @@ all: $(pdfs)
 %.pdf: %.md
 	pandoc -s header.yml $^ -o $@
 
-all:
+pdf:
 	pandoc --toc -V documentclass=report -s header.yml $(sort $(wildcard *.md)) -o resueltos.pdf

@@ -13,7 +13,7 @@ jobs:
         run: sudo apt install -y pandoc texlive texlive-latex-extra
 
       - name: Make pdf
-        run: make all
+        run: make pdf
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v2
