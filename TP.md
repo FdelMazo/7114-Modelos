@@ -45,13 +45,12 @@ El precio de venta es de $3.75 por barril de nafta súper y de $2.85 por barril 
 2. Hacer un análisis detallado post optimal de la corrida del punto 1.
 
 \newpage
+
 ## Situacion Problemática
 
 Se trata de un problema de producción con mezclas.
 
 Tenemos varios tipos de combustible que debemos mezclar para producir 2 tipos de nafta. Hay ciertas restricciones sobre la cantidad y propiedades de cada tipo. También en la producción de la nafta se debe tener en cuenta el costo de cada tipo de combustible.
-
-Debemos producir al menos de 8000 barriles de nafta súper y otra cantidad libre de nafta común.
 
 ## Objetivo
 
@@ -60,8 +59,8 @@ Hay que determinar las cantidades de los dos tipos de nafta a producir en un dí
 ## Hipótesis y Supuestos
 
 - Los barriles son aditivos y pueden aportar porcentualmente a la nafta final
-- No es necesario todos los tipos de gasolina para producir la nafta
-- Las potencias son una combinación lineal de las potencias de los combustibles que - componen a la nafta resultante.
+- No es necesario mezclar todos los tipos de gasolina para producir la nafta
+- Las potencias son una combinación lineal de las potencias de los combustibles que componen a la nafta resultante.
 - No se pierde volumen al mezclar la gasolina cruda
 - No hay pérdidas de barriles en el proceso
 - Los precios no varían en el periodo analizado
@@ -72,9 +71,7 @@ Hay que determinar las cantidades de los dos tipos de nafta a producir en un dí
 
 $G_{i,k}  \: (i \in \{ 1,2,3,4,5 \} \wedge k \in \{C,S\} ) \: [barriles/día]:$ Gasolina de tipo $i$ destinada a producir nafta del tipo $k$ ($C$ por común, $S$ por super)
 
-$N_k  \: (k \in {C,S} ) \: [barriles/día]:$ Nafta de tipo $k$ producida
-
-\
+$N_k  \: (k \in {C,S} ) \: [barriles/día]:$ Nafta de tipo $k$ producida \
 
 La nafta se obtiene de la mezcla de 5 tipos de gasolina
 $$N_C = \sum_{i = 1}^{5} G_{i,C}$$
@@ -89,22 +86,19 @@ $$G_{3,C}+G_{3,S} \leq 4000$$
 $$G_{4,C}+G_{4,S} \leq 5000$$
 $$G_{5,C}+G_{5,S} \leq 3000$$
 
-\
-
 Se requieren al menos 8000 barriles de nafta súper
 $$N_S \geq 8000$$
 
-\
-
 La nafta común debe tener una potencia de al menos 85
 $$G_{1,C} * 70 + G_{2,C} * 80 + G_{3,C} * 85 + G_{4,C} * 90 + G_{5,C}* 99 \geq N_C * 85$$
+
 La nafta súper debe tener una potencia de al menos 95
 $$G_{1,S} * 70 + G_{2,S} * 80 + G_{3,S} * 85 + G_{4,S} * 90 + G_{5,S}* 99 \geq N_S * 95$$
 
 ## Función Objetivo
 
 $$
-Ganancias = 2.85 * \sum_{i = 1}^{5} G_{i,C} + 3.75 * \sum_{i = 1}^{5} G_{i,S}
+Ganancias = 2.85 * N_C + 3.75 * N_S
 $$
 
 $$
@@ -117,9 +111,33 @@ $$ Max Z = Ganancias - Costos $$
 
 ## Solución y Análisis Post Optimal
 
-Como se puede ver en el anexo, la corrida de `GLPK` devuelve como resultado que la solucion óptima es....
+Como se puede ver en el anexo, la corrida de `GLPK` devuelve que no hay solución optima para las restricciones dadas, y por ende el problema es incompatible. Analizando el problema, buscamos por el absurdo el contraejemplo que demuestre que, efectivamente, no hay semejante solucion:
 
-Blablablaanalisis
+> Se quieren producir 8000 barriles de nafta super, con una potencia de al menos 95. Pero, si tomamos los 5000 barriles de gasolina cruda de tipo 4, y los 3000 barriles de gasolina cruda de tipo 5, mientras que su suma sí daría 8000 barriles, la combinación de potencia será de 93.375.
+
+Por supuesto que tomar cualquier otra combinación de gasolinas crudas devolvería una potencia aun menor que la generada por la solucion propuesta, considerando que las gasolinas de tipo 4 y 5 son las de mayor potencia.
+
+Habiendo demostrado que no hay solución óptima, solo nos queda preguntarnos como subsanar los conflictos de las restricciones dadas.
+
+Las modificaciones que se pueden hacer para llegar a una solución que cumpla con lo pedido puede ser cualquiera de las siguientes opciones, o bien una combinación adecuada de todos los puntos listados:
+
+- Se deben producir menos barriles de nafta super por día, en vez de 8000
+
+  - Al producir 5000 barriles provenientes de 3000 de gasolina de tipo 5 y 2000 de gasolina de tipo 4, se llega a una potencia de nafta super de 95.4
+
+- Se debe conseguir un nuevo tipo de gasolina cruda, de mayor potencia que la gasolina de tipo 5, procurando que haya los suficientes barriles para llegar a los 8000 por día de nafta super
+
+  - Al combinar 3000 barriles de una gasolina cruda hipotética de tipo 6 que tenga una potencia de 104, con los 5000 barriles de tipo 4, se consiguen 8000 barriles de nafta super de 95.25 de potencia
+
+- Se debe aumentar la cantidad de barriles de gasolina de tipo 5 de tal manera que se cumpla la restricción de 8000 barriles diarios
+
+  - Se pueden usar 8000 barriles de tipo 5
+
+  - Se pueden usar unos 3500 barriles de tipo 4, y 4500 de tipo 5, así llegando a una potencia de 95.0625
+
+- Se debe producir nafta super con menor potencia a 95
+
+  - Se puede buscar una potencia de al menos 93
 
 \newpage
 
