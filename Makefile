@@ -5,4 +5,4 @@ all: $(pdfs)
 	pandoc -s header.yml $^ -o $@
 
 pdf:
-	pandoc --toc -V documentclass=report -s header.yml $(sort $(wildcard *.md)) -o resueltos.pdf
+	pandoc --toc -V documentclass=report -s header.yml $(filter-out README.md TP.md, $(sort $(wildcard *.md))) -o resueltos.pdf
