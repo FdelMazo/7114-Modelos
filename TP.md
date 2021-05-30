@@ -73,6 +73,7 @@ Determinar la cantidad de los dos tipos de nafta a producir en un día para maxi
 - Las constantes del modelo no varían.
 - El período alcanza para producir tantos barriles de cada tipo de nafta como sea necesario.
 - No hay materia prima ni productos defectuosos.
+- Se pueden usar fracciones de barriles para la produccion de nafta, en vez de dedicar un barril entero para cada barril de nafta producido.
 
 ## Identificación de variables de decisión controlables
 
@@ -146,6 +147,8 @@ Las modificaciones que se pueden hacer para llegar a una solución que cumpla co
 
   - Se puede buscar una potencia de al menos 93
 
+Tomando por supuesto que la restricción de producir al menos 8000 barriles de nafta super por día es la más restrictiva (valga la redundancia) de todas las conflictivas, y que es la más facil de subsanar, se puede hacer una corrida del modelo sin esta restricción, llegando así a una solución optima: generar $32080 de ganancias, produciendo 16300 barriles de nafta comun y 1700 de nafta super. Las especificaciones de esta corrida estan presentes en el anexo de este informe.
+
 \newpage
 
 ## Software: `TP.mod`
@@ -157,3 +160,9 @@ Las modificaciones que se pueden hacer para llegar a una solución que cumpla co
 ## Solución con `GLPK`: `TP.sol`
 
 \lstinputlisting{TP.sol}
+
+\newpage
+
+## Solución con `GLPK` sin la restricción de producir 8000 barriles de nafta super: `TP-mod.sol`
+
+\lstinputlisting{TP-mod.sol}
