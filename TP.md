@@ -48,13 +48,11 @@ El precio de venta es de $3.75 por barril de nafta súper y de $2.85 por barril 
 
 ## Situacion Problemática
 
-Se trata de un problema de planificación de la producción con la particularidad de que se tienen mezclas de distintos tipos de gasolinas para producir 2 tipos de nafta como resultado. 
+Se trata de un problema de planificación de la producción con la particularidad de que se tienen mezclas de distintos tipos de gasolinas para producir 2 tipos de nafta como resultado.
 
 Cada mezcla debe cumplir con un mínimo de potencia y se tiene una demanda mínima de barriles de nafta súper. También en la producción de la nafta se debe tener en cuenta el costo de cada tipo de combustible.
 
-Representación gráfica del problema:
-
-![](img/nafta.png)
+![](img/TP-nafta.png)
 
 ## Objetivo
 
@@ -62,7 +60,7 @@ Determinar la cantidad de los dos tipos de nafta a producir en un día para maxi
 
 ## Hipótesis y Supuestos
 
-- Las masas de las gasolinas son aditivas y lineales. Es decir, que la cantidad final de barriles producidos en cada nafta es igual a la suma de las cantidades de barriles de las gasolinas que las componen.
+- Las masas de las gasolinas son aditivas y lineales. Es decir, la cantidad final de barriles producidos en cada nafta es igual a la suma de las cantidades de barriles de las gasolinas que las componen.
 - Se pueden producir cantidades arbitrariamente pequeñas de nafta.
 - No es necesario mezclar todos los tipos de gasolina para producir un tipo de nafta. Es decir, puede no llegar a utilizarse algún tipo de gasolina para algún tipo de nafta y hasta puede ocurrir que la nafta esté compuesta por un solo tipo de gasolina.
 - Las potencias son una combinación lineal de las potencias de los combustibles que componen a la nafta resultante.
@@ -71,10 +69,10 @@ Determinar la cantidad de los dos tipos de nafta a producir en un día para maxi
 - Los precios no varían en el periodo analizado
 - No hay más costos que el de los barriles
 - Toda la nafta producida va a venderse. No hay stock inicial ni final.
-- El consumo de los recursos es directamente proporcional a la cantidad fabricada. No importan las proporciones finales de cada nafta mientras cumpla con las especificaciones. El resultado y su costo por barril no se verá afectado..
+- El consumo de los recursos es directamente proporcional a la cantidad fabricada. No importan las proporciones finales de cada nafta mientras cumpla con las especificaciones. El resultado y su costo por barril no se verá afectado.
 - Todos los barriles de gasolina no utilizados se desechan de un período a otro.
 - Las constantes del modelo no varían.
-- El período alcanza para producit tantos barriles de cada tipo de nafta como sea necesario.
+- El período alcanza para producir tantos barriles de cada tipo de nafta como sea necesario.
 - No hay materia prima ni productos defectuosos.
 
 ## Identificación de variables de decisión controlables
@@ -161,7 +159,7 @@ Las modificaciones que se pueden hacer para llegar a una solución que cumpla co
 $ glpsol --model TP.mod
 GLPSOL--GLPK LP/MIP Solver 5.0
 Parameter(s) specified in the command line:
- --model TP.mod
+--model TP.mod
 Reading model section from TP.mod...
 Reading data section from TP.mod...
 TP.mod:23: warning: unexpected end of file; missing end statement inserted
@@ -182,15 +180,15 @@ GLPK Simplex Optimizer 5.0
 Preprocessing...
 9 rows, 12 columns, 34 non-zeros
 Scaling...
- A: min|aij| =  1.000e+00  max|aij| =  9.900e+01  ratio =  9.900e+01
-GM: min|aij| =  9.170e-01  max|aij| =  1.091e+00  ratio =  1.189e+00
-EQ: min|aij| =  8.409e-01  max|aij| =  1.000e+00  ratio =  1.189e+00
+A: min|aij| = 1.000e+00 max|aij| = 9.900e+01 ratio = 9.900e+01
+GM: min|aij| = 9.170e-01 max|aij| = 1.091e+00 ratio = 1.189e+00
+EQ: min|aij| = 8.409e-01 max|aij| = 1.000e+00 ratio = 1.189e+00
 Constructing initial basis...
 Size of triangular part is 9
-      0: obj =  -0.000000000e+00 inf =   8.372e+03 (1)
-      3: obj =   1.149000000e+04 inf =   2.721e+03 (1)
+0: obj = -0.000000000e+00 inf = 8.372e+03 (1)
+3: obj = 1.149000000e+04 inf = 2.721e+03 (1)
 LP HAS NO PRIMAL FEASIBLE SOLUTION
 glp_simplex: unable to recover undefined or non-optimal solution
-Time used:   0.0 secs
+Time used: 0.0 secs
 Memory used: 0.1 Mb (145248 bytes)
 \end{lstlisting}
