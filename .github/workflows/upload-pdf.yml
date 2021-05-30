@@ -10,7 +10,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Install Pandoc and LaTeX
-        run: sudo apt install -y pandoc texlive texlive-latex-extra texlive-latex-recommended
+        run: sudo apt install -y pandoc texlive texlive-latex-extra
 
       - name: Make pdf
         run: make pdf
