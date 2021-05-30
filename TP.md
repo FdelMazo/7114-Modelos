@@ -48,24 +48,34 @@ El precio de venta es de $3.75 por barril de nafta súper y de $2.85 por barril 
 
 ## Situacion Problemática
 
-Se trata de un problema de producción con mezclas.
+Se trata de un problema de planificación de la producción con la particularidad de que se tienen mezclas de distintos tipos de gasolinas para producir 2 tipos de nafta como resultado. 
 
-Tenemos varios tipos de combustible que debemos mezclar para producir 2 tipos de nafta. Hay ciertas restricciones sobre la cantidad y propiedades de cada tipo. También en la producción de la nafta se debe tener en cuenta el costo de cada tipo de combustible.
+Cada mezcla debe cumplir con un mínimo de potencia y se tiene una demanda mínima de barriles de nafta súper. También en la producción de la nafta se debe tener en cuenta el costo de cada tipo de combustible.
+
+Representación gráfica del problema:
+
+![](img/nafta.png)
 
 ## Objetivo
 
-Hay que determinar las cantidades de los dos tipos de nafta a producir en un día, buscando maximizar las ganancias.
+Determinar la cantidad de los dos tipos de nafta a producir en un día para maximizar las ganancias totales.
 
 ## Hipótesis y Supuestos
 
-- Los barriles son aditivos y pueden aportar porcentualmente a la nafta final
-- No es necesario mezclar todos los tipos de gasolina para producir la nafta
+- Las masas de las gasolinas son aditivas y lineales. Es decir, que la cantidad final de barriles producidos en cada nafta es igual a la suma de las cantidades de barriles de las gasolinas que las componen.
+- Se pueden producir cantidades arbitrariamente pequeñas de nafta.
+- No es necesario mezclar todos los tipos de gasolina para producir un tipo de nafta. Es decir, puede no llegar a utilizarse algún tipo de gasolina para algún tipo de nafta y hasta puede ocurrir que la nafta esté compuesta por un solo tipo de gasolina.
 - Las potencias son una combinación lineal de las potencias de los combustibles que componen a la nafta resultante.
 - No se pierde volumen al mezclar la gasolina cruda
 - No hay pérdidas de barriles en el proceso
 - Los precios no varían en el periodo analizado
 - No hay más costos que el de los barriles
-- Toda la nafta producida va a venderse
+- Toda la nafta producida va a venderse. No hay stock inicial ni final.
+- El consumo de los recursos es directamente proporcional a la cantidad fabricada. No importan las proporciones finales de cada nafta mientras cumpla con las especificaciones. El resultado y su costo por barril no se verá afectado..
+- Todos los barriles de gasolina no utilizados se desechan de un período a otro.
+- Las constantes del modelo no varían.
+- El período alcanza para producit tantos barriles de cada tipo de nafta como sea necesario.
+- No hay materia prima ni productos defectuosos.
 
 ## Identificación de variables de decisión controlables
 
