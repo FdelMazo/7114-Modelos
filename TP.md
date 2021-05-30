@@ -8,7 +8,6 @@ header-includes: |
 
   \usepackage{listings}
   \lstset{
-      columns=fullflexible,
       breaklines=true,
       breakatwhitespace=true,
       basicstyle=\ttfamily\footnotesize,
@@ -153,42 +152,8 @@ Las modificaciones que se pueden hacer para llegar a una solución que cumpla co
 
 \lstinputlisting{TP.mod}
 
-## Ejecución con `GLPK`
+\newpage
 
-\begin{lstlisting}
-$ glpsol --model TP.mod
-GLPSOL--GLPK LP/MIP Solver 5.0
-Parameter(s) specified in the command line:
---model TP.mod
-Reading model section from TP.mod...
-Reading data section from TP.mod...
-TP.mod:23: warning: unexpected end of file; missing end statement inserted
-23 lines were read
-Generating LIMITE1...
-Generating LIMITE2...
-Generating LIMITE3...
-Generating LIMITE4...
-Generating LIMITE5...
-Generating LIMITE_SUPER...
-Generating LIMITE_POTENCIA_COMUN...
-Generating LIMITE_POTENCIA_SUPER...
-Generating PRODUCCION...
-Generating z...
-Model has been successfully generated
-GLPK Simplex Optimizer 5.0
-11 rows, 12 columns, 45 non-zeros
-Preprocessing...
-9 rows, 12 columns, 34 non-zeros
-Scaling...
-A: min|aij| = 1.000e+00 max|aij| = 9.900e+01 ratio = 9.900e+01
-GM: min|aij| = 9.170e-01 max|aij| = 1.091e+00 ratio = 1.189e+00
-EQ: min|aij| = 8.409e-01 max|aij| = 1.000e+00 ratio = 1.189e+00
-Constructing initial basis...
-Size of triangular part is 9
-0: obj = -0.000000000e+00 inf = 8.372e+03 (1)
-3: obj = 1.149000000e+04 inf = 2.721e+03 (1)
-LP HAS NO PRIMAL FEASIBLE SOLUTION
-glp_simplex: unable to recover undefined or non-optimal solution
-Time used: 0.0 secs
-Memory used: 0.1 Mb (145248 bytes)
-\end{lstlisting}
+## Solución con `GLPK`: `TP.sol`
+
+\lstinputlisting{TP.sol}
