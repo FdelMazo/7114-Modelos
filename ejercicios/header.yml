@@ -1,9 +1,0 @@
----
-geometry: "a4paper, left=3cm,right=3cm,top=1.8cm,bottom=1.5cm"
-header-includes: |
-  \usepackage{fancyhdr}
-  \pagestyle{fancy}
-  \fancyhead[L]{[71.14] Modelos y Optimización I}
-  \fancyhead[R]{Federico del Mazo}
-  \fancyfoot[C]{}
----
