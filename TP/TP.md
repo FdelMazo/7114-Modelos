@@ -4,7 +4,7 @@ header-includes: |
   \usepackage{fancyhdr}
   \pagestyle{fancy}
   \fancyhead[L]{Grupo 2 \\ Cáceres (96454) - del Mazo (100029) \\ Pastine (100017) - Pistillo (99177) }
-  \fancyhead[R]{71.14 // 91.04 \\ Modelos y Optimización I \\ 31.05.2021}
+  \fancyhead[R]{71.14 // 91.04 \\ Modelos y Optimización I \\ 2021C1}
 
   \usepackage{listings}
   \lstset{
@@ -17,7 +17,7 @@ header-includes: |
   }
 ---
 
-# Trabajo Práctico
+# Enunciado - Primera Parte
 
 Una refinería mezcla 5 tipos de gasolina cruda (Tipo 1, Tipo 2, Tipo 3, Tipo 4 y Tipo 5) para producir dos tipos de nafta para autos (común y súper).
 
@@ -43,7 +43,19 @@ El precio de venta es de $3.75 por barril de nafta súper y de $2.85 por barril 
 
 2. Hacer un análisis detallado post optimal de la corrida del punto 1.
 
+# Enunciado - Segunda Parte
+
+Dada la imposibilidad de cumplir con los contratos se decidió no realizarlos y re negociar las condiciones. Bajo este nuevo escenario se pide, realizando independientemente un punto del otro:
+
+1. El sector de ventas nos pide un análisis detallado de los precios de venta por barril de nafta súper y nafta común. Ofreciéndoles alternativas y explicándoles el porqué de las mismas.
+
+2. El sector de compras nos informa que pueden re negociar los precios a pagar por los barriles de gasolina cruda, que les gustaría saber qué tipos de gasolina (1, 2, 3, 4, 5) nos resultan más estratégicos, que precios consideramos más competitivos y que disponibilidades de dichas gasolinas crudas nos interesan mantener y/o incrementar.
+
+3. El laboratorio de la refinería nos informa que están investigando unos nuevos aditivos que les permite incrementar la potencia de las gasolinas crudas, nos solicitan les informemos que gasolinas crudas y sus respectivas potencias nos interesaría que les demos prioridad en las investigaciones.
+
 \newpage
+
+# Trabajo Práctico - Primera Parte
 
 ## Situacion Problemática
 
@@ -51,7 +63,7 @@ Se trata de un problema de planificación de la producción con la particularida
 
 Cada mezcla debe cumplir con un mínimo de potencia y se tiene una demanda mínima de barriles de nafta súper. También en la producción de la nafta se debe tener en cuenta el costo de cada tipo de combustible.
 
-![](img/TP-nafta.png)
+![](TP-nafta.png)
 
 ## Objetivo
 
@@ -166,3 +178,7 @@ Tomando por supuesto que la restricción de producir al menos 8000 barriles de n
 ## Solución con `GLPK` sin la restricción de producir 8000 barriles de nafta super: `TP-mod.sol`
 
 \lstinputlisting{TP-mod.sol}
+
+\newpage
+
+# Trabajo Práctico - Segunda Parte
