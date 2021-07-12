@@ -63,7 +63,7 @@ Se trata de un problema de planificación de la producción con la particularida
 
 Cada mezcla debe cumplir con un mínimo de potencia y se tiene una demanda mínima de barriles de nafta súper. También en la producción de la nafta se debe tener en cuenta el costo de cada tipo de combustible.
 
-![](TP-nafta.png)
+![](img/nafta.png)
 
 ## Objetivo
 
@@ -182,3 +182,111 @@ Tomando por supuesto que la restricción de producir al menos 8000 barriles de n
 \newpage
 
 # Trabajo Práctico - Segunda Parte
+
+## Modelado y Resultados en Lindo
+
+### Funcional
+
+`MAX 2.05 G1C + 1.95 G2C + 1.9 G3C + 1.7 G4C + 0.85 G5C + 2.95 G1S + 2.85 G2S + 2.8 G3S + 2.6 G4S + 1.75 G5S`
+
+### Restricciones
+
+\begin{lstlisting}
+ST
+LimBar1) G1C + G1S <= 2000
+LimBar2) G2C + G2S <= 4000
+LimBar3) G3C + G3S <= 4000
+LimBar4) G4C + G4S <= 5000
+LimBar5) G5C + G5S <= 3000
+NComun) 70 G1C + 80 G2C + 85 G3C + 90 G4C + 99 G5C - 85 G1C - 85 G2C - 85 G3C - 85 G4C - 85 G5C >= 0
+NSuper) 70 G1S + 80 G2S + 85 G3S + 90 G4S + 99 G5S - 95 G1S - 95 G2S - 95 G3S - 95 G4S - 95 G5S >= 0
+END
+\end{lstlisting}
+
+### Resultados
+
+\begin{lstlisting}
+LP OPTIMUM FOUND AT STEP 7
+
+OBJECTIVE FUNCTION VALUE
+
+32080.00
+\end{lstlisting}
+
+\begin{lstlisting}
+VARIABLE VALUE REDUCED COST
+G1C 2000.000000 0.000000
+G2C 3642.105225 0.000000
+G3C 4000.000000 0.000000
+G4C 5000.000000 0.000000
+G5C 1657.894775 0.000000
+G1S 0.000000 0.000000
+G2S 357.894745 0.000000
+G3S 0.000000 0.000000
+G4S 0.000000 0.000000
+G5S 1342.105225 0.000000
+
+ROW SLACK OR SURPLUS DUAL PRICES
+LIMBAR1) 0.000000 0.700000
+LIMBAR2) 0.000000 1.500000
+LIMBAR3) 0.000000 1.900000
+LIMBAR4) 0.000000 2.150000
+LIMBAR5) 0.000000 2.110000
+NCOMUN) 0.000000 -0.090000
+NSUPER) 0.000000 -0.090000
+
+NO. ITERATIONS= 7
+
+RANGES IN WHICH THE BASIS IS UNCHANGED:
+
+                           OBJ COEFFICIENT RANGES
+
+VARIABLE CURRENT ALLOWABLE ALLOWABLE
+COEF INCREASE DECREASE
+G1C 2.050000 INFINITY 0.000000
+G2C 1.950000 0.000000 1.357143
+G3C 1.900000 INFINITY 0.000000
+G4C 1.700000 INFINITY 0.000000
+G5C 0.850000 0.000000 0.000000
+G1S 2.950000 0.000000 INFINITY
+G2S 2.850000 2.216666 0.000000
+G3S 2.800000 0.000000 INFINITY
+G4S 2.600000 0.000000 INFINITY
+G5S 1.750000 0.000000 0.000000
+
+                           RIGHTHAND SIDE RANGES
+      ROW         CURRENT        ALLOWABLE        ALLOWABLE
+                    RHS          INCREASE         DECREASE
+
+LIMBAR1 2000.000000 1133.333252 1400.000000
+LIMBAR2 4000.000000 3399.999756 3295.238281
+LIMBAR3 4000.000000 INFINITY 4000.000000
+LIMBAR4 5000.000000 4200.000000 3399.999756
+LIMBAR5 3000.000000 12357.143555 1214.285767
+NCOMUN 0.000000 17000.000000 21000.001953
+NSUPER 0.000000 4857.143066 49428.574219
+\end{lstlisting}
+
+### Gráficos
+
+#### Curvas de oferta en función de la ganancia
+
+|           Nafta Común           |           Nafta Súper           |
+| :-----------------------------: | :-----------------------------: |
+| ![](img/G1C.png){ width=300px } | ![](img/G1S.png){ width=300px } |
+| ![](img/G2C.png){ width=300px } | ![](img/G2S.png){ width=300px } |
+| ![](img/G3C.png){ width=300px } | ![](img/G3S.png){ width=300px } |
+| ![](img/G4C.png){ width=300px } | ![](img/G4S.png){ width=300px } |
+| ![](img/G5C.png){ width=300px } | ![](img/G5S.png){ width=300px } |
+
+## Análisis
+
+El precio actual de venta de Nafta Súper es de $3,75, y en el funcional se ve reflejado en la parte:
+
+\texttt{\textcolor{magenta}{(G1S + G2S + G3S + G4S + G5S) * 3,75} - 0,8 * G1S - 0,9 * G2S - 0.95 * G3S - 1,15 * G4S - 2 * G5S = 2,95 * G1S + 2,85 * G2S + 2,8 * G3S + 2,6 * G4S + 1,75 * G5S}
+
+En el último término se tienen las constantes `Cj = (2.95 2.85 2.8 2.6 1.75)` correspondientes a las ganancias por barril de gasolina de tipo “j” destinado a la nafta súper.
+
+En los gráficos pueden verse las curvas de oferta de cada barril de gasolina “j” destinado a nafta super, variando estas Cj
+
+Sabemos que del tipo 1 no vamos a poder producir más de 2000 barriles, y aumentar el precio de la nafta común no va a cambiar la cantidad de G1C producida, por lo mostrado en la tabla de la curva de oferta. Si quisieramos producir menos barriles G1C para no tener al recurso saturado y producir más barriles G1S, tendremos que aumentar el precio de la nafta súper
