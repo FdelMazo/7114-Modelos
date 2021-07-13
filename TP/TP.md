@@ -278,15 +278,3 @@ NSUPER 0.000000 4857.143066 49428.574219
 | ![](img/G3C.png){ width=300px } | ![](img/G3S.png){ width=300px } |
 | ![](img/G4C.png){ width=300px } | ![](img/G4S.png){ width=300px } |
 | ![](img/G5C.png){ width=300px } | ![](img/G5S.png){ width=300px } |
-
-## Análisis
-
-El precio actual de venta de Nafta Súper es de $3,75, y en el funcional se ve reflejado en la parte:
-
-\texttt{\textcolor{magenta}{(G1S + G2S + G3S + G4S + G5S) * 3,75} - 0,8 * G1S - 0,9 * G2S - 0.95 * G3S - 1,15 * G4S - 2 * G5S = 2,95 * G1S + 2,85 * G2S + 2,8 * G3S + 2,6 * G4S + 1,75 * G5S}
-
-En el último término se tienen las constantes `Cj = (2.95 2.85 2.8 2.6 1.75)` correspondientes a las ganancias por barril de gasolina de tipo “j” destinado a la nafta súper.
-
-En los gráficos pueden verse las curvas de oferta de cada barril de gasolina “j” destinado a nafta super, variando estas Cj
-
-Sabemos que del tipo 1 no vamos a poder producir más de 2000 barriles, y aumentar el precio de la nafta común no va a cambiar la cantidad de G1C producida, por lo mostrado en la tabla de la curva de oferta. Si quisieramos producir menos barriles G1C para no tener al recurso saturado y producir más barriles G1S, tendremos que aumentar el precio de la nafta súper
