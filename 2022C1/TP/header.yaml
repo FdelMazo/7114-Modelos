@@ -1,0 +1,32 @@
+---
+title: "Trabajo Práctico"
+subtitle: |
+  | Facultad de Ingeniería, Universidad de Buenos Aires
+  | [71.14] Modelos y Optimización I
+date: 02 de Mayo del 2022
+author: Federico del Mazo - 100029
+geometry: margin=2.5cm
+titlepage: true
+colorlinks: true
+header-includes: |
+  \usepackage{fancyhdr, xcolor, listings, framed, fvextra, caption, pdfpackages}
+  \pagestyle{fancy}
+  \fancyhead[L]{[71.14] Modelos y Optimización I \\ Trabajo Práctico}
+  \fancyhead[R]{Federico del Mazo \\ 2022C1}
+    
+  \captionsetup[figure]{labelformat=empty} 
+
+  \let\OldTexttt\texttt
+  \renewcommand{\texttt}[1]{\OldTexttt{\color{magenta}{#1}}}    
+
+  \let\oldshaded\Shaded
+  \newenvironment{leftbar_mod}{
+  \def\FrameCommand{{\color{magenta}\vrule width 1pt} \hspace{10pt}}
+  \MakeFramed {\advance\hsize-\width \FrameRestore}}
+  {\endMakeFramed}
+  \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\{\}}
+  \renewenvironment{Shaded}{\begin{leftbar_mod}\begin{oldshaded}}{\end{oldshaded}\end{leftbar_mod}}
+include-before:
+  \includepdf{enunciado.pdf}
+  \includepdf{datos.pdf}
+---
