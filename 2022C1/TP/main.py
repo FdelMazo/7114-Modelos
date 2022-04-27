@@ -27,7 +27,7 @@ def tsp(c):
         ].sort_values()
         for (nextc, distancia) in distancias_a_ciudad.iteritems():
             demanda = demandas[nextc]["demanda"]
-            if plata + demanda > 0 and plata + demanda < capacidad:
+            if plata + demanda >= 0 and plata + demanda <= capacidad:
                 break
 
         plata += demanda
