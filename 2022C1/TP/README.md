@@ -4,7 +4,7 @@ Se tienen distintos bancos en el mapa a los cuales tengo que visitar exactamente
 a cada uno, y en cada banco que visite tengo que recaudar/depositar dinero, siempre
 teniendo en cuenta que no puedo pasarme de ciertos límites. 
 
-Se trata de un problema de optimización tanto del viajante como de la móchila. Por un
+Se trata de un problema de optimización parecido al del viajante. Por un
 lado, quiero que la distancia recorrida sea la mínima posible, y por el otro quiero
 siempre asegurarme que el dinero que recaude no se pase de un monto fijo.
 
