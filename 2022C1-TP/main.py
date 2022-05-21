@@ -1,6 +1,7 @@
 import pandas as pd
 from scipy.spatial import distance_matrix
 import json
+from tqdm.auto import tqdm, trange
 
 CONFIG = json.load(open("datos_1.json"))
 
@@ -20,7 +21,7 @@ def tsp(c):
     plata = demandas[c]["demanda"]
     distancia_recorrida = 0
     visited = {c}
-    while len(visited) < len(ciudades):
+    for i in trange(len(ciudades) - 1, leave=False):
         distancias_a_ciudad = distancias.loc[camino[-1]]
         distancias_a_ciudad = distancias_a_ciudad[
             ~distancias_a_ciudad.index.isin(visited)
@@ -46,9 +47,11 @@ def check_sol(sol):
             raise Exception(f"Falla en {c}")
 
 
-sol = min(
-    [tsp(c) for c in ciudades if demandas[c]["demanda"] > 0],
-    key=lambda x: x["score"],
-)
+ciudades_positivas = [c for c in ciudades if demandas[c]["demanda"] >= 0]
+tsps = []
+for c in tqdm(ciudades_positivas):
+    tsps.append(tsp(c))
+    
+sol = min(tsps, key=lambda x: x["score"])
 check_sol(sol)
 print(sol["path"])
