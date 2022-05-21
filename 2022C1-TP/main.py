@@ -2,7 +2,7 @@ import pandas as pd
 from scipy.spatial import distance_matrix
 import json
 
-CONFIG = json.load(open("config.json"))
+CONFIG = json.load(open("datos_1.json"))
 
 ciudades = CONFIG["NODE_COORD_SECTION"]
 demandas = CONFIG["DEMANDAS"]

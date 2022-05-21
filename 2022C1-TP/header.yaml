@@ -16,7 +16,4 @@ header-includes: |
   \fancyhead[R]{Federico del Mazo \\ 2022C1}
     
   \captionsetup[figure]{labelformat=empty} 
-include-before:
-  \includepdf{enunciado.pdf}
-  \includepdf{datos.pdf}
 ---
