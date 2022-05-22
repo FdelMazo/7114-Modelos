@@ -3,7 +3,7 @@ from scipy.spatial import distance_matrix
 import json
 from tqdm.auto import trange
 
-CONFIG = json.load(open("datos_1.json"))
+CONFIG = json.load(open("datos_2.json"))
 
 ciudades = CONFIG["NODE_COORD_SECTION"]
 demandas = CONFIG["DEMANDAS"]
