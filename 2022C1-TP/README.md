@@ -27,3 +27,55 @@ del día.
 - Los montos preestablecidos no cambian
 - Todas las distancias entre bancos son conocidas y fijas
 - La ruta entre bancos es siempre la misma, sin variar su distancia
+- El monto inicial es cero
+
+## Constantes
+
+$CANT_{BANCOS} \in \mathbb{N}:$ Cantidad de bancos a visitar.
+
+$CAPACIDAD \in \mathbb{N}:$ Cuanto dinero puede transportar el camión.
+
+$DISTANCIA_{i, j} \in \mathbb{N}:$ Distancia del banco $i$ al banco $j$.
+
+$DEMANDA_{i} \in \mathbb{N}:$ Cuanto dinero entrega o recibe el banco $i$.
+
+## Variables de decisión controlables
+
+$$BANCOS \in \{1...CANT_{BANCOS}\}$$
+
+$Y_{i, j} \in \{0, 1\}:$ Variable bivalente que indica si el recorrido incluye ir del banco $i$ al banco $j$.
+
+$U_{i} \in \mathbb{N}:$ Número de secuencia del banco $i$ en el recorrido.
+
+$P_{i} \in \mathbb{N}_0:$ Plata que tiene el camión al llegar al punto $i$.
+
+\footnotesize Adicionalmente, por fuera de las variables, $M$ es una constante de valor muy grande y $m$ es una constante de valor muy pequeño. \normalsize
+
+## Vinculaciones y Restricciones
+
+Solo se visita una vez cada banco. 
+
+$$\sum_{\substack{i = 1\\ j \ne i}}^{BANCOS} Y_{i,j} = 1 \quad \forall j \in BANCOS$$
+
+$$\sum_{\substack{j = 1\\ j \ne i}}^{BANCOS} Y_{i,j} = 1 \quad \forall i \in BANCOS$$
+
+Evitamos subtours.
+
+$$\forall i,j \in BANCOS$$ $$U_{i} - U_{j} + CANT_{BANCOS} Y_{i,j} \le CANT_{BANCOS} - 1 $$
+
+En todo momento debo tener dinero (esto es redundante por la condición de
+no-negatividad pero lo escribimos igual) y este dinero no debe superar la capacidad de
+mi camión.
+
+$$\forall i \in BANCOS$$ $$0 \leq P_{i} \leq CAPACIDAD$$
+
+Vinculo la variable de dinero con la diferencia de demandas entre cada par de bancos.
+
+$$\forall i,j \in BANCOS$$ $$-M * (1 - Y_{i,j}) + DEMANDA_j \leq P_j - P_i \leq DEMANDA_i
++ M * (1 - Y_{i,j})$$
+
+
+## Función Objetivo
+
+$$Min \: Z = \mathop{\sum\sum}_{\substack{i = 1 j = 1 \\ i \ne j}}^{BANCOS} Y_{i,j} * DISTANCIA_{i,j}$$
+
