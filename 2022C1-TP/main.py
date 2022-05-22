@@ -1,7 +1,7 @@
 import pandas as pd
 from scipy.spatial import distance_matrix
 import json
-from tqdm.auto import tqdm, trange
+from tqdm.auto import trange
 
 CONFIG = json.load(open("datos_1.json"))
 
@@ -48,10 +48,7 @@ def check_sol(sol):
 
 
 ciudades_positivas = [c for c in ciudades if demandas[c]["demanda"] >= 0]
-tsps = []
-for c in tqdm(ciudades_positivas):
-    tsps.append(tsp(c))
-    
-sol = min(tsps, key=lambda x: x["score"])
+source = min(ciudades_positivas, key=lambda c: demandas[c]["demanda"])
+sol = tsp(source)
 check_sol(sol)
 print(sol["path"])
