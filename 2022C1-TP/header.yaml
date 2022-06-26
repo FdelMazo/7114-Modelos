@@ -16,4 +16,23 @@ header-includes: |
   \fancyhead[R]{Federico del Mazo \\ 2022C1}
     
   \captionsetup[figure]{labelformat=empty} 
+
+  \let\OldTexttt\texttt
+  \renewcommand{\texttt}[1]{\OldTexttt{\color{magenta}{#1}}}    
+
+  \let\oldshaded\Shaded
+  \newenvironment{leftbar_mod}{
+  \def\FrameCommand{{\color{magenta}\vrule width 1pt} \hspace{10pt}}
+  \MakeFramed {\advance\hsize-\width \FrameRestore}}
+  {\endMakeFramed}
+  \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\{\}}
+  \renewenvironment{Shaded}{\begin{leftbar_mod}\begin{oldshaded}}{\end{oldshaded}\end{leftbar_mod}}
+  
+  \let\origfigure\figure
+  \let\endorigfigure\endfigure
+  \renewenvironment{figure}[1][2] {
+      \expandafter\origfigure\expandafter[H]
+  } {
+      \endorigfigure
+  }
 ---

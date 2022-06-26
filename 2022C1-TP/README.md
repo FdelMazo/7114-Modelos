@@ -79,3 +79,59 @@ $$\forall i,j \in BANCOS$$ $$-M * (1 - Y_{i,j}) + DEMANDA_j \leq P_j - P_i \leq 
 
 $$Min \: Z = \mathop{\sum\sum}_{\substack{i = 1 j = 1 \\ i \ne j}}^{BANCOS} Y_{i,j} * DISTANCIA_{i,j}$$
 
+## CPLEX
+
+Primero se corren ambos modelos sin ningún tipo de modificación
+
+![](./img/subtourssin.png)
+
+![](./img/mtzsin.png)
+
+Luego, se modifica el código de CPLEX para insertar una solución inicial desde la cual
+ambos modelos parten, la cual proviene de correr el código de `main.py`
+
+```python
+[1, 98, 87, 76, 73, 48, 63, 30, 84, 7, 8, 89, 96, 35, 93, 52, 33, 92, 54, 46, 90, 56, 26, 75, 18, 85, 65, 55, 58, 50, 70, 86, 29, 81, 25, 20, 51, 43, 67, 32, 23, 38, 77, 14, 80, 15, 78, 59, 16, 79, 88, 94, 10, 3, 62, 22, 4, 45, 71, 44, 64, 72, 49, 31, 27, 41, 57, 39, 60, 66, 17, 11, 61, 36, 69, 24, 12, 53, 40, 42, 9, 28, 6, 37, 2, 19, 99, 47, 83, 97, 100, 5, 95, 82, 34, 21, 68, 91, 13, 74]
+```
+
+Esta solución se inserta en ambos modelos
+
+```C
+int ordenInicial[Cities] = [1, 98, 87, 76, 73, 48, 63, 30, 84, 7, 8, 89, 96, 35, 93, 52, 33, 92, 54, 46, 90, 56, 26, 75, 18, 85, 65, 55, 58, 50, 70, 86, 29, 81, 25, 20, 51, 43, 67, 32, 23, 38, 77, 14, 80, 15, 78, 59, 16, 79, 88, 94, 10, 3, 62, 22, 4, 45, 71, 44, 64, 72, 49, 31, 27, 41, 57, 39, 60, 66, 17, 11, 61, 36, 69, 24, 12, 53, 40, 42, 9, 28, 6, 37, 2, 19, 99, 47, 83, 97, 100, 5, 95, 82, 34, 21, 68, 91, 13, 74];
+int values[Edges];
+execute {
+  for ( var e in Edges) {
+    values[e] = 0;
+  }
+  var ciudadAnterior = ordenInicial[n];
+  for ( var i in Cities) {
+    var ciudad = ordenInicial[i];
+    if (ciudadAnterior < ciudad) {
+      values[Edges.find(ciudadAnterior, ciudad)] = 1;
+    } else {
+      values[Edges.find(ciudad, ciudadAnterior)] = 1;
+    }
+    ciudadAnterior = ciudad;
+  }
+}
+```
+
+```C
+int ordenInicial[cities] = [1, 98, 87, 76, 73, 48, 63, 30, 84, 7, 8, 89, 96, 35, 93, 52, 33, 92, 54, 46, 90, 56, 26, 75, 18, 85, 65, 55, 58, 50, 70, 86, 29, 81, 25, 20, 51, 43, 67, 32, 23, 38, 77, 14, 80, 15, 78, 59, 16, 79, 88, 94, 10, 3, 62, 22, 4, 45, 71, 44, 64, 72, 49, 31, 27, 41, 57, 39, 60, 66, 17, 11, 61, 36, 69, 24, 12, 53, 40, 42, 9, 28, 6, 37, 2, 19, 99, 47, 83, 97, 100, 5, 95, 82, 34, 21, 68, 91, 13, 74];
+int values[edges];
+execute {
+  for ( var e in edges) {
+    values[e] = 0;
+  }
+  var ciudadAnterior = ordenInicial[n];
+  for ( var i in cities) {
+    var ciudad = ordenInicial[i];
+    values[edges.find(ciudadAnterior, ciudad)] = 1;
+    ciudadAnterior = ciudad;
+  }
+}
+```
+
+![](./img/subtourscon.png)
+
+![](./img/mtzcon.png)
