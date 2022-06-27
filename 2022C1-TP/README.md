@@ -135,3 +135,29 @@ execute {
 ![](./img/subtourscon.png)
 
 ![](./img/mtzcon.png)
+
+Ambos modelos deben agregar restricciones para la eliminación de subtours.
+
+Las restricciones añadidas en `TSP_MTZ` son las vistas en clase
+
+```c
+forall ( i in cities : i > 1, j in cities : j > 1 && j != i )
+  subtour:
+    u[i] - u[j] + ( n - 1 ) * x[< i, j >] <= n - 2;
+```
+
+$$
+U_i - U_j + n Y_{i,j} \leq n - 1 \quad \forall i,j \in \{1...n\} \quad i \neq j
+$$
+
+Por otro lado, `TSP_subtours` es un modelo iterativo que agrega restricciones para que
+en cada iteración actual se evite entrar en los subtours encontrados en la iteración
+anterior. El ciclo de iteraciones termina cuando todos los subtours se eliminan.
+
+```C
+forall ( s in subtours )
+  sum ( i in Cities : s.subtour[i] != 0 ) x[< minl ( i, s.subtour[i] ), maxl 
+    ( i, s.subtour[i] ) >] <= s.size - 1;
+```
+
+
